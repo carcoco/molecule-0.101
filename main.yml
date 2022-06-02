@@ -1,0 +1,29 @@
+---
+- hosts: all
+  connection: local
+  become: true
+  tasks:
+    - name: Debug info
+      debug:
+        msg: "Hola caracola"
+    - name: Create file in /tmp
+      copy:
+        dest: /tmp/hola.txt
+        content: "This is the text\n"
+    - name: Run the equivalent of "apt-get update"
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Start nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+    - name: "Create a user: pepito"
+      user:
+        name: pepito
+        create_home: yes
+

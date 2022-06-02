@@ -1,0 +1,39 @@
+---
+- hosts: all
+  connection: local
+  become: true
+  tasks:
+    - name: Debug info
+      debug:
+        msg: "Hola caracola"
+    - name: Create file in /tmp
+      copy:
+        dest: /tmp/hola.txt
+        content: "This is the text\n"
+
+    - name: Install dependencies
+      package:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - policycoreutils-python
+        - libselinux-python
+
+#    - name: Run the equivalent of "yum update"
+#      yum:
+#        update_cache: yes
+
+    - name: Install nginx
+      yum:
+        name: nginx
+        state: present
+    - name: Start nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+    - name: "Create a user: pepito"
+      user:
+        name: pepito
+        create_home: yes
+
