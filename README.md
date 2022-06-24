@@ -6,7 +6,7 @@ Pico tuto about molecule.  AKA. 0.101
 
 $ pipenv shell
 
-$ pip install "molecule[lint,ansible,docker]"
+$ pipenv install "molecule[lint,ansible,docker]"
 
 ## Requirements
 
@@ -25,9 +25,8 @@ molecule converge
 
 MOLECULE_DISTRO=ubuntu2204 molecule test
 
-## To test centos:
+## To test in a centos machine:
 
-MOLECULE_PLAYBOOK=converge-centos.yml molecule converge
-MOLECULE_PLAYBOOK=converge-centos.yml molecule test
+MOLECULE_PLAYBOOK=converge-centos.yml MOLECULE_DISTRO=centos7 molecule test
 
 
