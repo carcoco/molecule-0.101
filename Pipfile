@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+molecule = {extras = ["ansible", "docker", "lint"], version = "*"}
 
 [dev-packages]
 
